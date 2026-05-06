@@ -1,0 +1,85 @@
+# Python
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.venv
+
+# OS
+.DS_Store
+.CFUserTextEncoding
+
+# Shell & tool history
+.zsh_history
+.zsh_sessions/
+.python_history
+.mysql_history
+.node_repl_history
+.lesshst
+.viminfo
+
+# Sensitive configs
+.ssh/
+.kaggle/
+.boto
+.gitconfig
+.claude.json
+.claude.json.backup
+
+# Large app & system directories
+Library/
+AndroidStudioProjects/
+Applications/
+IdeaProjects/
+"Google Drive"
+
+# IDE & editor configs
+.vscode/
+.vim/
+.windsurf/
+.warp/
+.copilot/
+.codeium/
+
+# Package manager caches
+.npm/
+.gradle/
+.m2/
+.composer/
+.conda/
+.anaconda/
+.continuum/
+.condarc
+.config/
+.local/
+.docker/
+.ollama/
+
+# Personal home directories
+Desktop/
+Downloads/
+Movies/
+Music/
+Pictures/
+Public/
+Google Drive
+.zshrc
+.claude/
+
+# Misc dotfiles
+.android/
+.anydesk/
+.openclaw/
+.ipython/
+.matplotlib/
+.spyder-py3/
+.bash_profile
+.profile
+.tcshrc
+.xonshrc
+.zprofile
+.zprofile.pysave
+.offlineimaprc
+.python-version
