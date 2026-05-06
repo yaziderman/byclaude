@@ -28,37 +28,35 @@
     canvas.height = H;
 
     const WALL = 2;
-    const RADIUS = 14;
 
-    const ball = {
-      x: W / 2,
-      y: H / 2,
-      vx: 3.7,
-      vy: 2.3,
-      radius: RADIUS,
-      color: '#e94560',
-    };
+    const COLORS = ['#e94560', '#f5a623', '#7ed321', '#4a90e2', '#bd10e0', '#50e3c2', '#ff6b6b', '#ffd93d'];
 
-    function update() {
-      ball.x += ball.vx;
-      ball.y += ball.vy;
+    const balls = [
+      { x: W * 0.3, y: H * 0.4, vx:  3.7, vy:  2.3, radius: 14 },
+      { x: W * 0.6, y: H * 0.6, vx: -2.9, vy:  3.5, radius: 11 },
+      { x: W * 0.5, y: H * 0.3, vx:  4.1, vy: -2.1, radius: 16 },
+      { x: W * 0.2, y: H * 0.7, vx: -3.3, vy: -2.8, radius: 10 },
+      { x: W * 0.8, y: H * 0.2, vx:  2.5, vy:  4.0, radius: 12 },
+    ].map((b, i) => ({ ...b, color: COLORS[i % COLORS.length] }));
 
-      // Left / right walls
-      if (ball.x - ball.radius <= WALL) {
-        ball.x = WALL + ball.radius;
-        ball.vx = Math.abs(ball.vx);
-      } else if (ball.x + ball.radius >= W - WALL) {
-        ball.x = W - WALL - ball.radius;
-        ball.vx = -Math.abs(ball.vx);
+    function updateBall(b) {
+      b.x += b.vx;
+      b.y += b.vy;
+
+      if (b.x - b.radius <= WALL) {
+        b.x = WALL + b.radius;
+        b.vx = Math.abs(b.vx);
+      } else if (b.x + b.radius >= W - WALL) {
+        b.x = W - WALL - b.radius;
+        b.vx = -Math.abs(b.vx);
       }
 
-      // Top / bottom walls
-      if (ball.y - ball.radius <= WALL) {
-        ball.y = WALL + ball.radius;
-        ball.vy = Math.abs(ball.vy);
-      } else if (ball.y + ball.radius >= H - WALL) {
-        ball.y = H - WALL - ball.radius;
-        ball.vy = -Math.abs(ball.vy);
+      if (b.y - b.radius <= WALL) {
+        b.y = WALL + b.radius;
+        b.vy = Math.abs(b.vy);
+      } else if (b.y + b.radius >= H - WALL) {
+        b.y = H - WALL - b.radius;
+        b.vy = -Math.abs(b.vy);
       }
     }
 
@@ -76,18 +74,19 @@
       ctx.fillStyle = 'rgba(22, 33, 62, 0.35)';
       ctx.fillRect(0, 0, W, H);
 
-      // Ball
-      ctx.beginPath();
-      ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-      ctx.fillStyle = ball.color;
-      ctx.shadowColor = ball.color;
-      ctx.shadowBlur = 18;
-      ctx.fill();
+      for (const b of balls) {
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
+        ctx.fillStyle = b.color;
+        ctx.shadowColor = b.color;
+        ctx.shadowBlur = 18;
+        ctx.fill();
+      }
       ctx.shadowBlur = 0;
     }
 
     function loop() {
-      update();
+      balls.forEach(updateBall);
       draw();
       requestAnimationFrame(loop);
     }
